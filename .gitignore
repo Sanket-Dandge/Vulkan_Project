@@ -2,3 +2,4 @@ bin
 build
 compile_commands.json
 external
+design_plan.md

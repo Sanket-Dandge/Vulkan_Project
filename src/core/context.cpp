@@ -14,19 +14,19 @@ namespace Uriel {
  *  it also adds layers and extensions as needed and are also checked to confirm availability.
  * */
 void Context::initializeInstance(ContextCreateInfo& info) {
-    //  INFO: Validation Layer enable/disable
+    //  @info: Validation Layer enable/disable
     if (info.enableValidationLayer) {
         info.addInstanceLayer("VK_LAYER_KHRONOS_validation", false);
     }
 
-    //  INFO: Defining the vulkan application
+    //  @info: Defining the vulkan application
     VkApplicationInfo applicationInfo{};
     applicationInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
     applicationInfo.pEngineName = info.engineName;
     applicationInfo.pApplicationName = info.appName;
     applicationInfo.apiVersion = VK_MAKE_VERSION(info.apiMajor, info.apiMinor, info.apiPatch);
 
-    //  INFO: Check if required instance layers and extensions are available or not
+    //  @info: Check if required instance layers and extensions are available or not
     auto layerProperties = getInstanceLayers();
     if (!checkInstanceEnablesArray(layerProperties, info.instanceLayers, info.m_availableInstanceLayers)) {
         return;
@@ -37,7 +37,7 @@ void Context::initializeInstance(ContextCreateInfo& info) {
         return;
     }
 
-    //  INFO: Putting layers and extensions in new vectors for the vulkan instance creation info
+    //  @info: Putting layers and extensions in new vectors for the vulkan instance creation info
     std::vector<const char*> instanceLayers;
     std::vector<const char*> instanceExtensions;
 
@@ -51,7 +51,7 @@ void Context::initializeInstance(ContextCreateInfo& info) {
         instanceExtensions.push_back(extension);
     }
 
-    //  INFO: Instance Creation Info for creating vulkan instance object
+    //  @info: Instance Creation Info for creating vulkan instance object
     VkInstanceCreateInfo instanceCreateInfo{};
     instanceCreateInfo.sType                   = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
     instanceCreateInfo.pApplicationInfo        = &applicationInfo;
@@ -67,7 +67,7 @@ void Context::initializeInstance(ContextCreateInfo& info) {
 
     LOG_INIT("Instance");
 
-    //  INFO: Condition To Enable Debugging
+    //  @info: Condition To Enable Debugging
     for(const auto& extension : instanceExtensions) {
         if (strcmp(extension, "VK_EXT_debug_utils") == 0) {
             enableDebugging();
@@ -111,7 +111,7 @@ void Context::pickPhysicalDevice(ContextCreateInfo& info, uint32_t index) {
 
     m_physicalDevice = physicalDevices[index];
 
-    //  INFO: Setting properties and features.
+    //  @info: Setting properties and features.
     vkGetPhysicalDeviceProperties(m_physicalDevice, &m_properties);
     vkGetPhysicalDeviceFeatures(m_physicalDevice, &deviceFeatures);
     vkGetPhysicalDeviceMemoryProperties(m_physicalDevice, &m_memoryProperties);
@@ -142,7 +142,7 @@ void Context::createLogicalDevice(ContextCreateInfo& info, VkPhysicalDeviceFeatu
     std::vector<VkDeviceQueueCreateInfo> queueCreateInfos{};
     const float defaultQueuePriority(0.f);
 
-    //  INFO: Ensuring a queue is used
+    //  @info: Ensuring a queue is used
     if (info.requestedQueues == 0u) {
         DEBUGLOG(ERROR, "not requested queue flag, fill requestedQueues");
         return;

@@ -1,26 +1,31 @@
-file(GLOB_RECURSE ENGINE_SOURCES
+file(GLOB_RECURSE ENGINE_SOURCES CONFIGURE_DEPENDS
     "*.cpp"
 )
 
-set(IMGUI_DIR ${CMAKE_SOURCE_DIR}/external/imgui)
+set(IMGUI_DIR "${CMAKE_SOURCE_DIR}/external/imgui")
 
-set(IMGUI_SOURCES
-    ${IMGUI_DIR}/imgui.cpp
-    ${IMGUI_DIR}/imgui_draw.cpp
-    ${IMGUI_DIR}/imgui_tables.cpp
-    ${IMGUI_DIR}/imgui_widgets.cpp
-    ${IMGUI_DIR}/imgui_demo.cpp
-    ${IMGUI_DIR}/backends/imgui_impl_glfw.cpp
-    ${IMGUI_DIR}/backends/imgui_impl_vulkan.cpp
+add_library(imgui STATIC
+    "${IMGUI_DIR}/imgui.cpp"
+    "${IMGUI_DIR}/imgui_draw.cpp"
+    "${IMGUI_DIR}/imgui_tables.cpp"
+    "${IMGUI_DIR}/imgui_widgets.cpp"
+    "${IMGUI_DIR}/backends/imgui_impl_glfw.cpp"
+    "${IMGUI_DIR}/backends/imgui_impl_vulkan.cpp"
 )
 
-add_library(imgui STATIC ${IMGUI_SOURCES})
-
-target_link_libraries(imgui PUBLIC glfw Vulkan::Vulkan)
-
 target_include_directories(imgui PUBLIC
-    ${IMGUI_DIR}
-    ${IMGUI_DIR}/backends
+    "${IMGUI_DIR}"
+    "${IMGUI_DIR}/backends"
+)
+
+target_link_libraries(imgui PUBLIC
+    glfw
+    Vulkan::Vulkan
+)
+
+# Remove the test entry point from the engine library sources.
+list(REMOVE_ITEM ENGINE_SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/main.cpp"
 )
 
 add_library(Uriel STATIC ${ENGINE_SOURCES})
@@ -37,8 +42,9 @@ target_link_libraries(Uriel PUBLIC
     ktx
 )
 
-target_compile_definitions(Uriel PRIVATE
-    $<$<CONFIG:Release>:NDEBUG>
-    $<$<CONFIG:RelWithDebInfo>:NDEBUG>
-    $<$<CONFIG:MinSizeRel>:NDEBUG>
+target_compile_options(Uriel PRIVATE
+    "-fmacro-prefix-map=${CMAKE_SOURCE_DIR}/="
 )
+
+add_executable(test main.cpp)
+target_link_libraries(test PRIVATE Uriel)
