@@ -1,9 +1,8 @@
 #pragma once
 
-#include <cstring>
 #include <vulkan/vulkan.h>
 
-namespace Uriel {
+namespace capella {
 
 class Buffer {
     public:
@@ -27,6 +26,11 @@ class Buffer {
 		VkResult invalidate(VkDeviceSize size = VK_WHOLE_SIZE, VkDeviceSize offset = 0);
 		void setupDescriptor(VkDeviceSize size = VK_WHOLE_SIZE, VkDeviceSize offset = 0);
 
+        //  TODO: Need functionality for these functions
+        void createBuffer();
+        void allocateMemoryForBuffer();
+
+        //  TODO: Check if buffer initialization is needed in the setup function or not
         void setup(VkDevice device);
         VkDevice device{};
 

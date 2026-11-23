@@ -3,33 +3,47 @@
 
 #include "core/context.h"
 #include "scene/Scene.h"
+#include <string>
 
-#define TINYGLTF_IMPLEMENTATION
-#define STB_IMAGE_IMPLEMENTATION
-#define TINYGLTF_NO_STB_IMAGE_WRITE
 #include <tinygltf/tiny_gltf.h>
 
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/fwd.hpp>
 #include <glm/gtc/quaternion.hpp>
 
-namespace Uriel {
+namespace capella {
 
 class SceneLoader {
     public:
         void buildSceneGraph(const tinygltf::Model& model, Scene& scene);
 
-        void loadTextures();
-        void loadMaterials();
         void loadMeshes(const tinygltf::Model& model, Scene& scene);
+        void loadMaterials(const tinygltf::Model& model, Scene& scene);
+
+        void loadImages(const tinygltf::Model& model, Scene& scene, VkQueue queue);
+        void loadTextures(const tinygltf::Model& model);
+        void loadSkins(const tinygltf::Model& model, Scene& scene);
+        void loadAnimations(const tinygltf::Model& model, Scene& scene);
+        void loadCamera(const tinygltf::Model& model, Scene& scene);
+
+        void loadFromFile(std::string path);
+
+        void draw(Scene& scene);
+
+        std::string path;
+
+    private:
+        Context* ctx;
+        Scene scene;
+        std::string TAG = "SceneLoader";
 
         //  @note: HELPER FUNCTIONS
         bool getAttributeDetails(const tinygltf::Model &model, const tinygltf::Primitive &primitive,
                                  const std::string &accessorName, const unsigned char *&bufferPointer,
                                  const tinygltf::Accessor *&accessorPointer, size_t &bufferStride);
 
-      private:
-        Context* ctx;
+        //  TODO: Add the function in the loadImages() function
+        void createTextureIfEmptyImages();
 };
 
 }

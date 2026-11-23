@@ -1,8 +1,6 @@
 #include "scene/Scene.h"
 
-void Scene::bindResourcesIfMeshExists(SceneNode node, glm::mat4 worldTransform) {
-
-}
+namespace capella {
 
 void Scene::traverse(SceneNode visitor) {
     for (const SceneNode& node : nodes) {
@@ -10,4 +8,6 @@ void Scene::traverse(SceneNode visitor) {
             continue;
         }
     }
+}
+
 }

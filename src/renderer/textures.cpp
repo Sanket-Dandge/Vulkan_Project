@@ -1,7 +1,7 @@
 #include "renderer/textures.h"
 #include <ktx.h>
 
-namespace Uriel {
+namespace capella {
 
 void Texture::setup(VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device) {
     this->instance = instance;

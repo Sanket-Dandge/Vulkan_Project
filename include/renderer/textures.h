@@ -6,7 +6,7 @@
 #include <ktx.h>
 #include <ktxvulkan.h>
 
-namespace Uriel {
+namespace capella {
 
 class Texture {
     public:

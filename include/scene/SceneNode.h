@@ -27,13 +27,34 @@ struct SceneNode {
     //  @info: Scene Object References
     int32_t meshIndex = -1;
     int32_t cameraIndex = -1;
-    int32_t lightIndex = -1;
+    int32_t skinIndex = -1;
 
     //  @info: Helper Functions
     bool hasMesh() { return meshIndex >= 0; }
     bool hasCamera() { return cameraIndex >= 0; }
-    bool hasLight() { return lightIndex >= 0; }
     bool hasParent() { return parentIndex == INVALID_NODE_INDEX; }
+};
+
+struct CameraPerspective {
+    float aspectRatio;
+    float yfov;
+    float zfar;
+    float znear;
+};
+
+struct CameraOrthographic {
+    float xmag;
+    float ymag;
+    float zfar;
+    float znear;
+};
+
+
+struct Camera {
+    std::string name;
+    std::string type;
+    CameraOrthographic orthographic{};
+    CameraPerspective perspective{};
 };
 
 #endif

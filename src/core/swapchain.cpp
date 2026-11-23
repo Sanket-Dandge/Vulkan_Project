@@ -9,11 +9,12 @@
 
 #include "core/swapchain.h"
 #include "core/Core.h"
+#include "helpers/logger.h"
 
-namespace Uriel {
+namespace capella {
 
 /*
- *  @begin this function initializes the instance, physical device and device object
+ *  @info: this function initializes the instance, physical device and device object
  * */
 void Swapchain::setup(VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device) {
     this->instance = instance;
@@ -22,7 +23,7 @@ void Swapchain::setup(VkInstance instance, VkPhysicalDevice physicalDevice, VkDe
 }
 
 /*
- *  @begin this function creates surface using glfwCreateWindowSurface function.
+ *  @info: this function creates surface using glfwCreateWindowSurface function.
  *  Surface creation is an abstraction representing the native window or display area
  *  where rendered images are eventually displayed
  * */
@@ -42,7 +43,7 @@ void Swapchain::createSurface(GLFWwindow* window) {
 }
 
 /*
- *  @begin 
+ *  @info: 
  *  Swapchain is the array of rendered images that is used for rendering and presentation on the surface
  *  Here, we choose the queue family that supports graphics queue and presentation queue (which is surface support)
  *  We also choose the surface format, surface capabilities, extent, present modes, transforms, swapchain images and
@@ -172,6 +173,7 @@ void Swapchain::createSwapchain(uint32_t width, uint32_t height, bool vsync) {
 	if (surfaceCapabilities.supportedUsageFlags & VK_IMAGE_USAGE_TRANSFER_SRC_BIT) {
 		swapchainCreateInfo.imageUsage |= VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
 	}
+
 	// Enable transfer destination on swap chain images if supported
 	if (surfaceCapabilities.supportedUsageFlags & VK_IMAGE_USAGE_TRANSFER_DST_BIT) {
 		swapchainCreateInfo.imageUsage |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
@@ -180,7 +182,7 @@ void Swapchain::createSwapchain(uint32_t width, uint32_t height, bool vsync) {
     VkResult res = vkCreateSwapchainKHR(device, &swapchainCreateInfo, nullptr, &m_swapchain);
     assert(!res);
 
-    LOG_INIT("Swapchain");
+    LOG_INFO(TAG, "Swapchain is created");
 
     //  INFO: When new image has to be rendered in place of the old one
 	if (oldSwapchain != VK_NULL_HANDLE) { 
@@ -213,8 +215,6 @@ void Swapchain::createSwapchain(uint32_t width, uint32_t height, bool vsync) {
 
         vkCreateImageView(device, &colorViewCreateInfo, nullptr, &m_imageViews[i]);
     }
-
-    LOG_INIT("SwapchainImageView");
 }
 
 /*

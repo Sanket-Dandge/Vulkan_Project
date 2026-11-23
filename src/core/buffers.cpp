@@ -1,7 +1,8 @@
 #include "core/buffers.h"
-#include <vulkan/vulkan.h>
+#include <cstring>
+#include <vulkan/vulkan_core.h>
 
-namespace Uriel {
+namespace capella {
 
 void Buffer::setup(VkDevice device) {
     this->device = device;

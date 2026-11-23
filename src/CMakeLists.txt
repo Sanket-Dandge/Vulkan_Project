@@ -28,13 +28,13 @@ list(REMOVE_ITEM ENGINE_SOURCES
     "${CMAKE_CURRENT_SOURCE_DIR}/main.cpp"
 )
 
-add_library(Uriel STATIC ${ENGINE_SOURCES})
+add_library(Capella STATIC ${ENGINE_SOURCES})
 
-target_include_directories(Uriel PUBLIC
+target_include_directories(Capella PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-target_link_libraries(Uriel PUBLIC
+target_link_libraries(Capella PUBLIC
     glfw
     Vulkan::Vulkan
     X11::X11
@@ -42,9 +42,9 @@ target_link_libraries(Uriel PUBLIC
     ktx
 )
 
-target_compile_options(Uriel PRIVATE
+target_compile_options(Capella PRIVATE
     "-fmacro-prefix-map=${CMAKE_SOURCE_DIR}/="
 )
 
 add_executable(test main.cpp)
-target_link_libraries(test PRIVATE Uriel)
+target_link_libraries(test PRIVATE Capella)

@@ -10,7 +10,7 @@
 
 #define DEFAULT_FENCE_TIMEOUT 100000000000
 
-namespace Uriel {
+namespace capella {
 
 inline uint32_t findMemoryType(VkPhysicalDevice physicalDevice, uint32_t typeFilter, VkMemoryPropertyFlags properties) {
     VkPhysicalDeviceMemoryProperties memProperties;
@@ -363,7 +363,5 @@ inline VkPipelineTessellationStateCreateInfo fillTessellationCreateInfo(uint32_t
     pipelineTessellationStateCreateInfo.patchControlPoints = patchControlPoints;
     return pipelineTessellationStateCreateInfo;
 }
-
-
 
 }

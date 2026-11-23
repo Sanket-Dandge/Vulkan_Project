@@ -1,11 +1,12 @@
 #include <cassert>
 #include <vulkan/vulkan.h>
+#include <cstring>
 
 #include "core/context.h"
 #include "core/Core.h"
 #include "utils.h"
 
-namespace Uriel {
+namespace capella {
 
 /*
  *  @begin this function creates vulkan instance (which is connection between application & vulkan runtime).

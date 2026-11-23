@@ -5,18 +5,21 @@
 #include <vector>
 #include <vulkan/vulkan_core.h>
 
-namespace Uriel {
+namespace capella {
 
 struct ContextCreateInfo {
-    const char* appName = "Vulkan_Renderer";
-    const char* engineName = "Uriel";
+    //  @info: Vulkan Application Info
+    const char* appName = "GameScene";
+    const char* engineName = "Capella";
 
     uint32_t apiMajor = 1;
-    uint32_t apiMinor = 2;
+    uint32_t apiMinor = 3;
     uint32_t apiPatch = 0;
 
-    bool enableValidationLayer = false; //  NOTE: By default, false
+    //  @info: logs enabler
+    bool enableValidationLayer = false;
 
+    //  @info: extension/layer info
     struct ApiFeature {
         ApiFeature(const char* name, bool isOptional = false)
             :   name(name), optional(isOptional) {}
@@ -29,6 +32,7 @@ struct ContextCreateInfo {
     ApiFeatureArray instanceExtensions;
     ApiFeatureArray deviceExtensions;
 
+    //  @info: info on which queue are available in a queuefamily
     struct QueueFamilyIndices {
         uint32_t graphics;
         uint32_t compute;

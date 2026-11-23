@@ -2,10 +2,11 @@
 
 #include <GLFW/glfw3.h>
 #include <cstdint>
+#include <string>
 #include <vector>
 #include <vulkan/vulkan_core.h>
 
-namespace Uriel {
+namespace capella {
 
 class Swapchain {
     public:
@@ -38,6 +39,8 @@ class Swapchain {
         VkPhysicalDevice physicalDevice{VK_NULL_HANDLE};
         VkDevice device{VK_NULL_HANDLE};
         VkSurfaceKHR surface{VK_NULL_HANDLE};
+
+        std::string TAG = "Swapchain";
         
 };
 

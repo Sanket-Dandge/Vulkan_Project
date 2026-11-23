@@ -2,7 +2,7 @@
 
 #include <cstdint>
 #include <vulkan/vulkan.h>
-#include "logger.h"
+#include "helpers/logger.h"
 
 #define COLOR_RESET   "\033[0m"
 #define COLOR_GREEN   "\033[32m"
