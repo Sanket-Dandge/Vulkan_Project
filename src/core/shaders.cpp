@@ -1,5 +1,4 @@
-#include "renderer/shaders.h"
-#include "helpers/logger.h"
+#include "core/shaders.h"
 #include <exception>
 #include <filesystem>
 #include <fstream>
@@ -38,8 +37,7 @@ namespace capella {
         if (needCompile) {
             std::ifstream file(glslPath);
             if (!file) {
-                //  TODO: Add the path as well in the log
-                LOG_ERROR(TAG, "failed to open GLSL file: ");
+                LOG_ERROR(TAG, "failed to open GLSL file: %s", glslPath.c_str());
                 std::terminate();
             }
 
@@ -75,7 +73,7 @@ namespace capella {
     std::vector<char> Shader::read(std::string filename) {
         std::ifstream file(filename, std::ios::ate | std::ios::binary);
         if (!file.is_open()) {
-            LOG_ERROR(TAG, "failed to open the file");
+            LOG_ERROR(TAG, "failed to open the file: %s", filename.c_str());
             std::terminate();
         }
 
@@ -112,8 +110,7 @@ namespace capella {
         if (std::filesystem::exists(path)) {
             compileSPVFile(path, isVertexShader);
         } else {
-            //  TODO: Add the path of the file here
-            LOG_ERROR(TAG, "path does not exist: ");
+            LOG_ERROR(TAG, "path does not exist: %s", path.c_str());
             std::terminate();
         }
 

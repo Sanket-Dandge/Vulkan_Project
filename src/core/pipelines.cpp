@@ -1,4 +1,5 @@
-#include <renderer/pipelines.h>
+#include "core/pipelines.h"
+#include <vulkan/vulkan_core.h>
 
 namespace capella {
 
@@ -23,9 +24,11 @@ namespace capella {
             LOG_ERROR(TAG, "Failed to create pipeline layout");
             std::terminate();
         }
+
+        LOG_INFO(TAG, "Successfully created the pipeline layout.");
     }
 
-    void Pipeline::createPipeline() {
+    void Pipeline::createGraphicsPipeline() {
         VkGraphicsPipelineCreateInfo pipelineCreateInfo{};
         pipelineCreateInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
 
@@ -50,7 +53,6 @@ namespace capella {
         pipelineCreateInfo.pStages = shaderStagesArray.data();
 
         auto vertexInputInfo = addVertexInputInfo();
-
         auto inputAssemblyInfo = addInputAssemblyInfo();
         auto viewportInfo = addViewportInfo();
         auto rasterizationInfo = addRasterizationInfo();
@@ -76,6 +78,8 @@ namespace capella {
             LOG_ERROR(TAG, "Failed to create graphics pipeilne");
             std::terminate();
         }
+
+        LOG_INFO(TAG, "Successfully created the graphics pipeline.");
     }
 
     //  @info: defines vertex shader stage info for pipeline creation
@@ -237,6 +241,15 @@ namespace capella {
         pushConstantRangeInfo.size = pipelineInfo.pushConstantSize;
 
         return pushConstantRangeInfo;
+    }
+
+    void Pipeline::destroy() {
+        if (mPipelineCache != VK_NULL_HANDLE) {
+            vkDestroyPipelineCache(device, mPipelineCache, nullptr);
+        }
+
+        vkDestroyPipeline(device, mPipeline, nullptr);
+        vkDestroyPipelineLayout(device, mPipelineLayout, nullptr);
     }
 
 }

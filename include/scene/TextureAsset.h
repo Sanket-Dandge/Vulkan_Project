@@ -19,7 +19,7 @@ struct TextureAsset {
         uint32_t miplevels = 1;
         VkFormat format = VK_FORMAT_R8G8B8A8_UNORM;
 
-        void loadglTFImage(tinygltf::Image& gltfImage, std::string& filepath, Context* ctx, VkQueue cmdQueue);
+        void loadglTFImage(tinygltf::Image& gltfImage, std::string filepath, Context* ctx, VkQueue cmdQueue);
 
         //  WARN: Not sure about these functions
         void updateDescriptor();

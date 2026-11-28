@@ -1,9 +1,4 @@
-#include "renderer/renderpass.h"
-#include <algorithm>
-#include <iterator>
-#include <stdexcept>
-#include <vector>
-#include <vulkan/vulkan_core.h>
+#include "core/renderpass.h"
 
 namespace capella {
     uint32_t Renderpass::createAttachment(VkFormat format, VkSampleCountFlagBits sampleCount, VkAttachmentLoadOp loadOp, VkAttachmentStoreOp storeOp, VkImageLayout initialLayout, VkImageLayout finalLayout, VkAttachmentLoadOp stencilLoadOp, VkAttachmentStoreOp stencilStoreOp) {

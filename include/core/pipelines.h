@@ -71,6 +71,8 @@ struct PipelineConfig {
 
     std::vector<VkPushConstantRange> pushConstants;
     VkShaderStageFlags pushConstantStageFlags;
+
+    //  @note: the size should be of pushconstant struct
     size_t pushConstantSize;
 
     
@@ -139,7 +141,7 @@ namespace capella {
 
             void createPipelineCache();
             void createPipelineLayout(PipelineConfig& info);
-            void createPipeline();
+            void createGraphicsPipeline();
 
             VkPipelineShaderStageCreateInfo addVertexShaderInfo(VkShaderModule& vertexModule);
             VkPipelineShaderStageCreateInfo addFragmentShaderInfo(VkShaderModule& fragmentModule);
@@ -161,6 +163,8 @@ namespace capella {
 
             VkPushConstantRange addPushConstant();
 
+            void destroy();
+
         private:
             VkPipelineCache mPipelineCache;
             VkPipeline mPipeline;
@@ -170,7 +174,7 @@ namespace capella {
             VkDevice device;
             VkRenderPass renderpass;
 
-            std::string TAG = "Pipeline";
+            const char* TAG = "Pipeline";
 
     };
 }

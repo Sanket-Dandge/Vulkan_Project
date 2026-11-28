@@ -40,7 +40,7 @@ class Swapchain {
         VkDevice device{VK_NULL_HANDLE};
         VkSurfaceKHR surface{VK_NULL_HANDLE};
 
-        std::string TAG = "Swapchain";
+        const char* TAG = "Swapchain";
         
 };
 

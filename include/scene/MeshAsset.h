@@ -20,7 +20,6 @@ struct Vertex {
     glm::vec4 weights;
 };
 
-//  TODO: Will need it in phase-3
 struct AABB {
     glm::vec3 min{0.f};
     glm::vec3 max{0.f};
@@ -38,7 +37,6 @@ struct MeshPrimitive {
     std::vector<Vertex> vertices;
     std::vector<uint32_t> indices;
                                //
-    //  TODO: Will need it in phase-3
     AABB boundingBox;           //  @info: world space for phase-3 culling
 };
 

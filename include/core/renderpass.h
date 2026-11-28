@@ -1,8 +1,11 @@
 #ifndef RENDERPASS_H
 #define RENDERPASS_H
 
+#include <algorithm>
+#include <iterator>
 #include <optional>
 #include <string>
+#include <stdexcept>
 #include <vector>
 #include <vulkan/vulkan.h>
 #include "helpers/logger.h"
@@ -43,7 +46,7 @@ namespace capella {
             void destroy();
 
           private:
-            std::string TAG = "Renderpass";
+            const char* TAG = "Renderpass";
             VkRenderPass mRenderpass = VK_NULL_HANDLE;
 
             VkPhysicalDevice physicalDevice;

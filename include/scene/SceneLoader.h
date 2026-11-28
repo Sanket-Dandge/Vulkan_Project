@@ -30,12 +30,12 @@ class SceneLoader {
 
         void draw(Scene& scene);
 
-        std::string path;
+        const char* path;
 
     private:
         Context* ctx;
         Scene scene;
-        std::string TAG = "SceneLoader";
+        const char* TAG = "SceneLoader";
 
         //  @note: HELPER FUNCTIONS
         bool getAttributeDetails(const tinygltf::Model &model, const tinygltf::Primitive &primitive,

@@ -23,7 +23,7 @@ namespace capella {
         private:
             VkDevice device;
             VkShaderModule shaderModule;
-            std::string TAG = "Shader";
+            const char* TAG = "Shader";
 
     };
 }

@@ -3,10 +3,10 @@
 // #include <iostream>
 //
 // int main() {
-//     std::string TAG = "MAIN";
+//     const char* TAG = "MAIN";
 //     LOG_INFO(TAG, "Best day");
 //
-//     std::string modelFilePath = "assets/models/venus.gltf";
+//     const char* modelFilePath = "assets/models/venus.gltf";
 //     capella::SceneLoader loader;
 //
 //     loader.loadFromFile(modelFilePath);
@@ -37,7 +37,7 @@ const int SAMPLE_HEIGHT = 1080;
 int main (int argc, char *argv[]) {
     (void)argc;
 
-    std::string TAG = "MAIN";
+    const char* TAG = "MAIN";
     LOG_INFO(TAG, "Best day");
 
     glfwSetErrorCallback(onErrorCallback);
